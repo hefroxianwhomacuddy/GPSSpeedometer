@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GPSSpeedometer 1.0.25</string>
+    <string name="app_name">GPSSpeedometer 1.0</string>
     <string name="cut_off">Cut Off Fractional Frequency</string>
     <string name="weights">Number of Weights</string>
     <string name="cut_off_value">Cutoff Value = 0.01</string>
