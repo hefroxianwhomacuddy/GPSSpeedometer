@@ -70,7 +70,7 @@ public class SpeedRoundelView extends View{
 		blackText = new Paint();
 		blackText.setFlags(Paint.ANTI_ALIAS_FLAG);
 		blackText.setStyle(Style.FILL);
-		blackText.setTextSize(128.0f);
+		blackText.setTextSize(120.0f);
 		blackText.setColor(Color.BLACK);
 		
 		textBounds = new Rect();

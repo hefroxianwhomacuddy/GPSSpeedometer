@@ -13,7 +13,6 @@ import com.pnorton.gpsspeedometer.views.SpeedRoundelView;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.FragmentActivity;
@@ -131,8 +130,14 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	
 	private void setupSpeedRoundels()
 	{
+		// Setup the Speed Roundels 5 in total
 		m_roundels = new Vector<SpeedRoundelView>();
+		
+		// Standard Speed Limits used on UK Roads in mph
 		int speeds[] = {30,40,50,60,70};
+		
+		// Iterate through the speeds adding each view to the 
+		// ViewFlipper
 		for(int s : speeds)
 		{
 			SpeedRoundelView view = new SpeedRoundelView(this);
@@ -256,24 +261,26 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	private OnTouchListener flipper_listener = new OnTouchListener() {
 
 		public boolean onTouch(View v, MotionEvent event) {
-			// TODO Auto-generated method stub
 			
+			// Check the Touch Action
 			switch(event.getAction())
 			{
 			case MotionEvent.ACTION_DOWN:
+				// Down Stroke Event store position
 				touch_pos.x = (int) event.getX();
 				touch_pos.y = (int) event.getY();
 				return true;
 			case MotionEvent.ACTION_UP:
+				// Up Stroke Event handle roundel flip
 				if(touch_pos.x > (int)event.getX())
 				{
 					// Increase Speed Limit
-					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showNext();
+					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showPrevious();
 				}
 				else
 				{
 					// Decrease Speed Limit
-					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showPrevious();
+					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showNext();
 				}
 				return true;
 			default:
