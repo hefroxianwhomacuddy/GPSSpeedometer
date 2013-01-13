@@ -5,12 +5,14 @@ import java.util.TimerTask;
 import java.util.Vector;
 
 import com.pnorton.gpsspeedometer.R;
+import com.pnorton.gpsspeedometer.alert.GPSSpeedAlerter;
 import com.pnorton.gpsspeedometer.alert.SpeedAlerter;
 import com.pnorton.gpsspeedometer.filters.Filter;
 import com.pnorton.gpsspeedometer.filters.MovingAverageFilter;
 import com.pnorton.gpsspeedometer.gps.GPSSpeedometerManager;
 import com.pnorton.gpsspeedometer.views.DefaultSpeedoView;
 import com.pnorton.gpsspeedometer.views.SpeedRoundelView;
+import com.pnorton.gpsspeedometer.views.TrafficLightIndicatorView;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -36,7 +38,7 @@ import android.widget.ViewFlipper;
  * @version 1.0.26
  * 
  */
-public class GPSSpeedometerActivity extends FragmentActivity {
+public class GPSSpeedometerActivity extends FragmentActivity implements TrafficLightListener {
 
 	// --------------------------------------------------------------------------------------------
 
@@ -55,7 +57,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	// Moving Average Filter Object
 	private Filter m_filter;
 	
-	// private SpeedAlerter m_alerter;
+	// Alerter for Speeds
+	private SpeedAlerter m_alerter;
 
 	// Wake lock
 	private PowerManager.WakeLock m_wake_lock;
@@ -106,6 +109,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 		{
 			((ViewFlipper)findViewById(R.id.viewFlipperRoundels)).addView(v);
 		}
+		
+		m_alerter = getGPSSpeedAlerter();
 
 		// Set the SeekBars and Event Handlers
 		setupControls();
@@ -154,6 +159,13 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	private Filter getMovingAverageFilter(int weights)
 	{
 		return new MovingAverageFilter(weights);
+	}
+	
+	// --------------------------------------------------------------------------------------------
+	
+	private SpeedAlerter getGPSSpeedAlerter()
+	{
+		return new GPSSpeedAlerter(this,30);
 	}
 
 	// --------------------------------------------------------------------------------------------
@@ -337,6 +349,7 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 				m_speedo_view.setSpeed(mph_speed);
 				m_speedo_view.setTrip(m_manager.getTotalDistanceMiles());
 				m_speedo_view.setOdometer((int) m_manager.getOdometerMiles());
+				m_alerter.updateSpeed((int)mph_speed);
 
 			}
 
@@ -362,6 +375,58 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 
 		}
 
+	}
+	
+	// --------------------------------------------------------------------------------------------
+
+	public void setGreen() {
+		
+		Runnable runner = new Runnable(){
+
+			public void run() {
+				
+				((TrafficLightIndicatorView) findViewById(R.id.trafficLightSpeedo)).setState(
+						TrafficLightIndicatorView.LIGHT_GREEN);
+				
+			}
+		};
+		
+		runOnUiThread(runner);
+		
+	}
+	
+	// --------------------------------------------------------------------------------------------
+
+	public void setAmber() {
+		Runnable runner = new Runnable(){
+
+			public void run() {
+				
+				((TrafficLightIndicatorView) findViewById(R.id.trafficLightSpeedo)).setState(
+						TrafficLightIndicatorView.LIGHT_AMBER);
+				
+			}
+		};
+		
+		runOnUiThread(runner);
+		
+	}
+	
+	// --------------------------------------------------------------------------------------------
+
+	public void setRed() {
+		Runnable runner = new Runnable(){
+
+			public void run() {
+				
+				((TrafficLightIndicatorView) findViewById(R.id.trafficLightSpeedo)).setState(
+						TrafficLightIndicatorView.LIGHT_RED);
+				
+			}
+		};
+		
+		runOnUiThread(runner);
+		
 	}
 
 	// --------------------------------------------------------------------------------------------
