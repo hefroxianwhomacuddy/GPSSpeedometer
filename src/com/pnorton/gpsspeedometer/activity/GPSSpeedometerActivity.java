@@ -12,12 +12,17 @@ import com.pnorton.gpsspeedometer.views.DefaultSpeedoView;
 import com.pnorton.gpsspeedometer.views.SpeedRoundelView;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -57,6 +62,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	private GPSSpeedometerPreferences m_prefs;
 	
 	private Vector<SpeedRoundelView> m_roundels;
+	
+	private Point touch_pos;
 
 	// --------------------------------------------------------------------------------------------
 
@@ -87,6 +94,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 
 		// Set the Trip Miles Value
 		m_manager.setTripMiles(m_prefs.getTrip());
+		
+		touch_pos = new Point();
 		
 		setupSpeedRoundels();
 		
@@ -238,8 +247,43 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 				+ m_prefs.getWeights());
 		((SeekBar) findViewById(R.id.seekWeights))
 				.setOnSeekBarChangeListener(weights_listener);
+		((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).setOnTouchListener(flipper_listener);
 
 	}
+	
+	// --------------------------------------------------------------------------------------------
+	
+	private OnTouchListener flipper_listener = new OnTouchListener() {
+
+		public boolean onTouch(View v, MotionEvent event) {
+			// TODO Auto-generated method stub
+			
+			switch(event.getAction())
+			{
+			case MotionEvent.ACTION_DOWN:
+				touch_pos.x = (int) event.getX();
+				touch_pos.y = (int) event.getY();
+				return true;
+			case MotionEvent.ACTION_UP:
+				if(touch_pos.x > (int)event.getX())
+				{
+					// Increase Speed Limit
+					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showNext();
+				}
+				else
+				{
+					// Decrease Speed Limit
+					((ViewFlipper) findViewById(R.id.viewFlipperRoundels)).showPrevious();
+				}
+				return true;
+			default:
+				break;
+			}
+			
+			return false;
+		}
+		
+	};
 
 
 	// --------------------------------------------------------------------------------------------
