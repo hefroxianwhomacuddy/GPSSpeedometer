@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VERSION 1.0.10 -->
+<resources>
+    <!-- Color for the Base Dial -->
+    <color name="color_dial">#FF202020</color>
+    <!-- Color for the Centre Point of the Dial -->
+    <color name="color_dial_centre">#FF303030</color>
+    <!-- Color for the needle pointer -->
+    <color name="color_needle">#FFFF6666</color>
+    <!-- Color for the Dial Ticks -->
+    <color name="color_ticks">#FF6666FF</color>   
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- VERSION 1.0.22 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false" >
+    <LinearLayout
+        android:layout_width="0dp"
+    	android:layout_height="match_parent"
+    	android:layout_weight="2"
+    	android:orientation="horizontal">
+
+        <com.pnorton.gpsspeedometer.views.DefaultSpeedoView
+            android:id="@+id/defaultSpeedoView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    	
+	</LinearLayout>
+	<LinearLayout
+        android:layout_width="0dp"
+    	android:layout_height="match_parent"
+    	android:layout_weight="1"
+    	android:orientation="vertical">
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/weights"/>
+        <SeekBar
+            android:id="@+id/seekWeights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+        <TextView 
+            android:id="@+id/textViewWeights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="@string/weights_value"/>
+	</LinearLayout>
+</LinearLayout>
