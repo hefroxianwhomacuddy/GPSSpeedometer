@@ -6,15 +6,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class SpeedRoundelView extends View{
 	
-	private RectF outerRound;
-	private RectF innerRound;
+	// ------------------------------------------------------------------------------------------
+	
 	private int speed_limit = 70;
 	
 	private Paint outerRed;
@@ -28,24 +27,33 @@ public class SpeedRoundelView extends View{
 	private float innerRadius;
 	
 	private Rect textBounds;
+	
+	// ------------------------------------------------------------------------------------------
 
 	public SpeedRoundelView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		// TODO Auto-generated constructor stub
 		init();
+		
 	}
 
+	// ------------------------------------------------------------------------------------------
+	
 	public SpeedRoundelView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 		init();
 	}
+	
+	// ------------------------------------------------------------------------------------------
 
 	public SpeedRoundelView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		init();
 	}
+	
+	// ------------------------------------------------------------------------------------------
 
 	private void init()
 	{
@@ -72,6 +80,19 @@ public class SpeedRoundelView extends View{
 		textPoint = new PointF();
 		
 	}
+	
+	// ------------------------------------------------------------------------------------------
+	
+	public void setSpeedLimit(int speed)
+	{
+		speed_limit = speed;
+		
+		textBounds = new Rect();
+		
+		blackText.getTextBounds(speed_limit + "", 0, 2, textBounds);
+	}
+	
+	// ------------------------------------------------------------------------------------------
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -81,6 +102,8 @@ public class SpeedRoundelView extends View{
 		canvas.drawText(this.speed_limit + "", textPoint.x, textPoint.y, blackText);
 		
 	}
+	
+	// ------------------------------------------------------------------------------------------
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -103,7 +126,7 @@ public class SpeedRoundelView extends View{
 		
 	}
 	
-	
+	// ------------------------------------------------------------------------------------------
 	
 
 }
