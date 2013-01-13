@@ -2,12 +2,14 @@ package com.pnorton.gpsspeedometer.activity;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import com.pnorton.gpsspeedometer.R;
 import com.pnorton.gpsspeedometer.filters.Filter;
 import com.pnorton.gpsspeedometer.filters.MovingAverageFilter;
 import com.pnorton.gpsspeedometer.gps.GPSSpeedometerManager;
 import com.pnorton.gpsspeedometer.views.DefaultSpeedoView;
+import com.pnorton.gpsspeedometer.views.SpeedRoundelView;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 
 /**
@@ -52,6 +55,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 
 	// Shared Preferences for this application
 	private GPSSpeedometerPreferences m_prefs;
+	
+	private Vector<SpeedRoundelView> m_roundels;
 
 	// --------------------------------------------------------------------------------------------
 
@@ -82,6 +87,14 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 
 		// Set the Trip Miles Value
 		m_manager.setTripMiles(m_prefs.getTrip());
+		
+		setupSpeedRoundels();
+		
+		
+		for(SpeedRoundelView v : m_roundels)
+		{
+			((ViewFlipper)findViewById(R.id.viewFlipperRoundels)).addView(v);
+		}
 
 		// Set the SeekBars and Event Handlers
 		setupControls();
@@ -103,6 +116,20 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 		// Set the Update rate for the speedo view (currently 40 ms = 25 fps)
 		m_timer.schedule(m_timer_task, 40, 40);
 
+	}
+	
+	// --------------------------------------------------------------------------------------------
+	
+	private void setupSpeedRoundels()
+	{
+		m_roundels = new Vector<SpeedRoundelView>();
+		int speeds[] = {30,40,50,60,70};
+		for(int s : speeds)
+		{
+			SpeedRoundelView view = new SpeedRoundelView(this);
+			view.setSpeedLimit(s);
+			m_roundels.add(view);
+		}
 	}
 	
 	// --------------------------------------------------------------------------------------------

@@ -93,6 +93,13 @@ public class SpeedRoundelView extends View{
 	}
 	
 	// ------------------------------------------------------------------------------------------
+	
+	public int getSpeedLimit()
+	{
+		return speed_limit;
+	}
+	
+	// ------------------------------------------------------------------------------------------
 
 	@Override
 	protected void onDraw(Canvas canvas) {
