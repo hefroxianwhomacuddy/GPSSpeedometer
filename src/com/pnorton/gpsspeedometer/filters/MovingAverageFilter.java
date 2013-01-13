@@ -1,22 +1,14 @@
 package com.pnorton.gpsspeedometer.filters;
 
-/*
- * REVISION HISTORY
- * 
- * 1.0.22 Initial Version for GPSSpeedometer correction for an
- * inherent defect in all previous versions
- * 
- */
-
 /**
  * Class to Represent a Moving Average Data Filter of variable
  * kernel length 
  * 
  * @author Peter B Norton
- * @version 1.0.22
+ * @version 1.0.26
  *
  */
-public class MovingAverageFilter {
+public class MovingAverageFilter implements Filter{
 
 	// Array of Values in the kernel
 	private float[] m_values;
