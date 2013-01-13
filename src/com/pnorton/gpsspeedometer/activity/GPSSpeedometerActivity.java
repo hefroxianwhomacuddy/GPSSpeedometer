@@ -5,6 +5,7 @@ import java.util.TimerTask;
 import java.util.Vector;
 
 import com.pnorton.gpsspeedometer.R;
+import com.pnorton.gpsspeedometer.alert.SpeedAlerter;
 import com.pnorton.gpsspeedometer.filters.Filter;
 import com.pnorton.gpsspeedometer.filters.MovingAverageFilter;
 import com.pnorton.gpsspeedometer.gps.GPSSpeedometerManager;
@@ -53,6 +54,8 @@ public class GPSSpeedometerActivity extends FragmentActivity {
 	
 	// Moving Average Filter Object
 	private Filter m_filter;
+	
+	// private SpeedAlerter m_alerter;
 
 	// Wake lock
 	private PowerManager.WakeLock m_wake_lock;
