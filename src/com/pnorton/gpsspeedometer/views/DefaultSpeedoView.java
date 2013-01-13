@@ -14,25 +14,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-/*
- * REVISION HISTORY
- * 
- * 1.0.4 Initial Version
- * 
- * 1.0.5 Start Initial Drawing, VW Type Speedometer used as default
- * 
- * 1.0.7 Variable Font Size now computed based on screen size
- * 
- * 1.0.9 Colour resources now being used instead of hard defined values
- * 
- * 1.0.14 Kilometres ring added to the speedometer along with text
- * 
- * 1.0.15 Added labels for mph and kmh in the dial also added odometer and
- * trip counter display
- * 
- * 1.0.21 Color of Display Box text changed to same as 7 segment digits
- *
- */
 
 /**
  * Default Speedo View for the Application

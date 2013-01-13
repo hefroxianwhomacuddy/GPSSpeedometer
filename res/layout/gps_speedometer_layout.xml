@@ -40,5 +40,11 @@
             android:layout_height="wrap_content"
             android:textSize="10sp"
             android:text="@string/weights_value"/>
+
+        <com.pnorton.gpsspeedometer.views.SpeedRoundelView
+            android:id="@+id/speedRoundelView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 	</LinearLayout>
 </LinearLayout>
