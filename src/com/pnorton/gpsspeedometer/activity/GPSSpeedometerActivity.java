@@ -8,6 +8,7 @@ import com.pnorton.gpsspeedometer.R;
 import com.pnorton.gpsspeedometer.alert.GPSSpeedAlerter;
 import com.pnorton.gpsspeedometer.alert.SpeedAlerter;
 import com.pnorton.gpsspeedometer.filters.Filter;
+import com.pnorton.gpsspeedometer.filters.FilterContext;
 import com.pnorton.gpsspeedometer.filters.MovingAverageFilter;
 import com.pnorton.gpsspeedometer.gps.GPSSpeedometerManager;
 import com.pnorton.gpsspeedometer.views.DefaultSpeedoView;
@@ -55,7 +56,7 @@ public class GPSSpeedometerActivity extends FragmentActivity implements TrafficL
 	private GPSTimerTask m_timer_task;
 	
 	// Moving Average Filter Object
-	private Filter m_filter;
+	private FilterContext m_filter;
 	
 	// Alerter for Speeds
 	private SpeedAlerter m_alerter;
@@ -72,6 +73,7 @@ public class GPSSpeedometerActivity extends FragmentActivity implements TrafficL
 
 	// --------------------------------------------------------------------------------------------
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -83,7 +85,7 @@ public class GPSSpeedometerActivity extends FragmentActivity implements TrafficL
 		m_speedo_view = ((DefaultSpeedoView) findViewById(R.id.defaultSpeedoView));
 
 		// Set the Low Pass Cascade Filter to default value
-		m_filter = getMovingAverageFilter(4);
+		m_filter = new FilterContext(new MovingAverageFilter(4));
 
 		// Start a new GPS Capture 
 		m_manager = new GPSSpeedometerManager();
@@ -152,13 +154,6 @@ public class GPSSpeedometerActivity extends FragmentActivity implements TrafficL
 			view.setSpeedLimit(s);
 			m_roundels.add(view);
 		}
-	}
-	
-	// --------------------------------------------------------------------------------------------
-	
-	private Filter getMovingAverageFilter(int weights)
-	{
-		return new MovingAverageFilter(weights);
 	}
 	
 	// --------------------------------------------------------------------------------------------
