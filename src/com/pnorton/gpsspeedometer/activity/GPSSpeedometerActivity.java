@@ -7,7 +7,6 @@ import java.util.Vector;
 import com.pnorton.gpsspeedometer.R;
 import com.pnorton.gpsspeedometer.alert.GPSSpeedAlerter;
 import com.pnorton.gpsspeedometer.alert.SpeedAlerter;
-import com.pnorton.gpsspeedometer.filters.Filter;
 import com.pnorton.gpsspeedometer.filters.FilterContext;
 import com.pnorton.gpsspeedometer.filters.MovingAverageFilter;
 import com.pnorton.gpsspeedometer.gps.GPSSpeedometerManager;
